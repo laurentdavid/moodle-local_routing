@@ -68,6 +68,14 @@ Key points:
 * Routes can be defined via YAML, PHP 8 attributes, or PHP code.
 * Define HTTP methods, requirements, host/scheme if needed.
 
+
+**Testing it !**:
+
+Go to frameworks/symfony_project and run
+```bash
+  php -S localhost:8000 -t public
+```
+
 ---
 
 ## 2. Laravel Routing
@@ -132,6 +140,13 @@ $app->run();
 * Middleware support.
 * Grouped routes with `$app->group()`.
 
+**Testing it !**: 
+
+Go to frameworks/slim_framework_project and run
+```bash
+  php -S localhost:8000 -t public
+```
+
 ---
 
 ## 4. FastRoute
@@ -167,6 +182,13 @@ Key points:
 
 * High-performance dispatcher.
 * Pure PHP definition—no additional layers.
+
+**Testing it !**:
+
+Go to frameworks/fast_route_project and run
+```bash
+  php -S localhost:8000 -t public
+```
 
 ---
 

@@ -26,6 +26,8 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Sample API for the routing plugin.
  *
+ * An API will be able to serve several routes. This is used to replace the old web service API by a more modern approach.
+ *
  * @package     local_routing
  * @category    string
  * @copyright   2025 Laurent David <laurent.david@moodle.com>

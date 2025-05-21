@@ -27,6 +27,8 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * A shim for local/routing/index.php routes.
  *
+ * A shim will be used to replace the original script in the Moodle core.
+ *
  * @package     local_routing
  * @category    string
  * @copyright   2025 Laurent David <laurent.david@moodle.com>

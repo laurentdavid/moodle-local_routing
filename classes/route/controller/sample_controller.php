@@ -27,6 +27,8 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Sample controller for the routing plugin.
  *
+ * A controller will be able to serve several routes. It is implementation of a controller in MVC.
+ *
  * @package     local_routing
  * @category    string
  * @copyright   2025 Laurent David <laurent.david@moodle.com>
@@ -54,13 +56,20 @@ class sample_controller {
      * @return ResponseInterface
      */
     #[route(
-        path: '/sample',
+        path: '/sample[/{name}]',
         method: ['GET', 'POST'],
+        pathtypes: [
+            new \core\router\schema\parameters\path_parameter(
+                name: 'name',
+                type: \core\param::ALPHANUMEXT,
+                default: 'Please fill in your name in the name parameter',
+            ),
+        ],
         queryparams: [
             new query_parameter(
-                name: 'message',
+                name: 'queryname',
                 type: \core\param::ALPHANUMEXT,
-                default: 'Hello world!',
+                default: 'Please fill in your name in the name parameter',
             ),
         ],
         requirelogin: new require_login(
@@ -71,25 +80,27 @@ class sample_controller {
     public function handler(
         ServerRequestInterface $request,
         ResponseInterface $response,
+        ?string $name = null,
     ): ResponseInterface {
-        global $PAGE, $OUTPUT;
+        global $PAGE;
 
         $context = system::instance();
 
-        $message = $request->getQueryParams()['message'];
+        $message = $request->getQueryParams()['queryname'];
+        $message = $name ?? $message;
         $title = get_string('pluginname', 'local_routing');
         $PAGE->set_url('/sample');
         $PAGE->set_context($context);
         $PAGE->set_title($title);
         $PAGE->set_heading($title);
+        $renderer = $PAGE->get_renderer('core');
         $code = 200;
         $response = $response->withStatus($code);
-        $response->getBody()->write($OUTPUT->header());
-        $response->getBody()->write($OUTPUT->heading($title));
+        $response->getBody()->write($renderer->header());
         $response->getBody()->write(
-            $OUTPUT->box($message)
+            $renderer->box("Hello, $message!", 'generalbox boxaligncenter', 'sample'),
         );
-        $response->getBody()->write($OUTPUT->footer());
+        $response->getBody()->write($renderer->footer() ?? ''); // Small issue with the footer when testing using core_renderer_cli.
 
         return $response;
     }
