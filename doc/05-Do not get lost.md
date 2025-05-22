@@ -58,7 +58,7 @@ Moodle 5.0+ provides PHPUnit tests for the router subsystem. Core tests are in *
 In your plugin (e.g., `local/yourplugin/tests/router_test.php`):
 
 ```php
-class yourplugin_route_test extends \advanced_testcase {
+class yourplugin_route_test extends route_testcase {
     public function test_sample_route() {
         $this->resetAfterTest();
         $this->setAdminUser(); // Set the user to admin if not we are redirected to the login page.
