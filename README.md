@@ -27,7 +27,7 @@ a new `.htaccess` file in your Moodle root with the following content:
    ```bash
    ```apacheconf
    # in your Moodle root or local/router/.htaccess
-   FallbackResource /local/router/r.php
+   FallbackResource /r.php
    ```
 
    And ensure `AllowOverride All` in your original `<Directory>` block.
